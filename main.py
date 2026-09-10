@@ -3,6 +3,7 @@ import customtkinter
 import keyboard
 import time
 import winshell
+import subprocess
 from pynput.mouse import Listener
 
 mouseListener=None
@@ -61,6 +62,12 @@ def darkToLight():
     customtkinter.set_appearance_mode("light")
     appearanceButton.configure(text="Switch to dark mode", width=25, command=lightToDark)
 
+def restartExplorer():
+    restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
+    time.sleep(0.1)
+    subprocess.Popen(["explorer.exe"], shell=True)
+    print("Restarted!")
+
 root=customtkinter.CTk()
 root.geometry("400x300")
 root.bind('<Return>', unlockMouse)
@@ -82,5 +89,8 @@ recycleButton.pack(padx=20, pady=20)
 
 appearanceButton=customtkinter.CTkButton(root, text="Switch to dark mode", width=25, command=lightToDark)
 appearanceButton.pack(padx=20, pady=20)
+
+restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer)
+restartExplorerButton.pack(padx=20, pady=20)
 
 root.mainloop()
