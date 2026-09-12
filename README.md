@@ -10,3 +10,9 @@
   Self explanatory, init?
 - Restart Windows Explorer
   If taskbar is frozen, use this to quickly and safely force-restart Windows Explorer (not the file picker)
+- Update winget packages
+  no more typing winget update --all
+- Flush DNS
+  Wipe your PC of your interesting searches (and sometimes fixes errors if the cache is outdated)
+- Clear clipboard
+  Wipe your clipboard history of suspicious anime girl pics

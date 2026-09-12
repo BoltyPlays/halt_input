@@ -4,6 +4,7 @@ import keyboard
 import time
 import winshell
 import subprocess
+from ctypes import windll
 from pynput.mouse import Listener
 
 mouseListener=None
@@ -42,17 +43,10 @@ def unlockMouse(event=None):
     print("EVENT: Unlocked mouse.")
 
 def emptyBin():
-    try:
-        winshell.recycle_bin().empty(confirm=True, show_progress=False, sound=False)
+    winshell.recycle_bin().empty(confirm=True, show_progress=False, sound=False)
         # thx g4g
         # https://www.geeksforgeeks.org/python/how-to-empty-recycle-bin-using-python/
-        recycleButton.configure(text="Emptied!", width=25, command=print("Emptying bin successful."))
-        time.sleep(3)
-        recycleButton.configure(text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
-    except:
-        recycleButton.configure(text="Already empty!", width=25, command=print("Already empty!"))
-        time.sleep(3)
-        recycleButton.configure(text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
+    recycleButton.configure(text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
 
 def lightToDark():
     customtkinter.set_appearance_mode("dark")
@@ -68,14 +62,29 @@ def restartExplorer():
     subprocess.Popen(["explorer.exe"], shell=True)
     print("Restarted!")
 
+def updateWinget():
+    command="winget update --all"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+
+def flushDNS():
+    command="ipconfig /flushdns"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+
+def clearClipboard():
+    if windll.user32.OpenClipboard(None):
+        windll.user32.EmptyClipboard()
+        windll.user32.CloseClipboard()
+    # https://stackoverflow.com/questions/9123090/clear-clipboard
+
+
 root=customtkinter.CTk()
-root.geometry("400x300")
+root.geometry("400x600")
 root.bind('<Return>', unlockMouse)
 
 customtkinter.set_default_color_theme("green")
 customtkinter.set_appearance_mode("light")
 
-label =tk.Label(root, text="Halt! Input")
+label=customtkinter.CTkLabel(root, text="Halt! Input")
 label.pack()
 
 keyboardButton=customtkinter.CTkButton(root, text="Halt Input", width=25, command=lockKeyboard)
@@ -92,5 +101,14 @@ appearanceButton.pack(padx=20, pady=20)
 
 restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer)
 restartExplorerButton.pack(padx=20, pady=20)
+
+updateWingetButton=customtkinter.CTkButton(root, text="Update Winget packages", width=25, command=updateWinget)
+updateWingetButton.pack(padx=20, pady=20)
+
+flushDNSButton=customtkinter.CTkButton(root, text="Flush DNS", width=25, command=flushDNS)
+flushDNSButton.pack(padx=20, pady=20)
+
+clearClipboardButton=customtkinter.CTkButton(root, text="Clear clipboard", width=25, command=clearClipboard)
+clearClipboardButton.pack(padx=20, pady=20)
 
 root.mainloop()
