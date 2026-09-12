@@ -1,18 +1,18 @@
-## **HALT!** Input
-(Might be) A toolbox for maintenance/fun things. Not sure yet
+# **HALT!** Input
+A toolbox for maintenance/fun things.
 
-# Features (so far)
+## Features (so far)
 - Keyboard blocking
-  Hate it when you're trying to clean your keyboard and then random letters start popping up in your search bar? Here you go; no need to say thanks.
+  hate it when you're trying to clean your keyboard and then random letters start popping up in your search bar? here you go; no need to say thanks.
 - Mouse lock
-  Same purpose of the keyboard blocker named above, but for a mouse. To unlock press "enter".
+  same purpose of the keyboard blocker named above, but for a mouse. to unlock press "enter".
 - Empty bin
-  Self explanatory, init?
+  self explanatory, init?
 - Restart Windows Explorer
-  If taskbar is frozen, use this to quickly and safely force-restart Windows Explorer (not the file picker)
+  if taskbar is frozen, use this to quickly and safely force-restart Windows Explorer (not the file picker)
 - Update winget packages
-  no more typing winget update --all
+  no more typing "winget update --all"
 - Flush DNS
-  Wipe your PC of your interesting searches (and sometimes fixes errors if the cache is outdated)
+  wipe your PC of your interesting searches (and sometimes fixes errors if the cache is outdated)
 - Clear clipboard
-  Wipe your clipboard history of suspicious anime girl pics
+  wipe your clipboard history of screenshots containing deleted Discord messages
