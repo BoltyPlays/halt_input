@@ -16,3 +16,9 @@ A toolbox for maintenance/fun things.
   wipe your PC of your interesting searches (and sometimes fixes errors if the cache is outdated)
 - Clear clipboard\
   wipe your clipboard history of screenshots containing deleted Discord messages
+- Battery Report\
+  you generate a battery report if you have one
+- Parrot\
+  spawns a terminal with a dancing parrot
+- Mystery\
+  spooky…

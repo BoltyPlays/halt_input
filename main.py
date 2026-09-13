@@ -76,9 +76,21 @@ def clearClipboard():
         windll.user32.CloseClipboard()
     # https://stackoverflow.com/questions/9123090/clear-clipboard
 
+def parrot():
+    command="curl parrot.live"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+
+def batteryReport():
+    command="powercfg /batteryreport"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+
+def rickroll():
+    command="curl ascii.live/rick"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+
 
 root=customtkinter.CTk()
-root.geometry("400x600")
+root.geometry("400x800")
 root.bind('<Return>', unlockMouse)
 
 customtkinter.set_default_color_theme("green")
@@ -110,5 +122,14 @@ flushDNSButton.pack(padx=20, pady=20)
 
 clearClipboardButton=customtkinter.CTkButton(root, text="Clear clipboard", width=25, command=clearClipboard)
 clearClipboardButton.pack(padx=20, pady=20)
+
+batteryReportButton=customtkinter.CTkButton(root, text="Generate battery report (if applicable)", width=25, command=batteryReport)
+batteryReportButton.pack(padx=20, pady=20)
+
+parrotButton=customtkinter.CTkButton(root, text="Parrot", width=25, command=parrot)
+parrotButton.pack(padx=20, pady=20)
+
+rickrollButton=customtkinter.CTkButton(root, text="Mystery Button", width=25, command=rickroll)
+rickrollButton.pack(padx=20, pady=20)
 
 root.mainloop()
