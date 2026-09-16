@@ -4,15 +4,20 @@ import keyboard
 import time
 import winshell
 import subprocess
+import ctypes
+import sys
 from ctypes import windll
 from pynput.mouse import Listener
 
 mouseListener=None
 
+# note: use PyInstaller with --uac-admin
+
 def lockKeyboard():
     for keys in range(200):
         keyboard.block_key(keys)
     keyboardButton.configure(text="Unblock input", command=unlockKeyboard)
+    mouseButton.configure(text="Not usable when keyboard is locked.", command=print("hello"))
     print("EVENT: Locked keyboard.")
 
 def unlockKeyboard():
@@ -22,6 +27,8 @@ def unlockKeyboard():
         except KeyError:
             pass
     keyboardButton.configure(text="Halt input", command=lockKeyboard)
+    mouseButton.configure(text="Lock Mouse", width=25, command=lockMouse)
+
     print("EVENT: Unlocked Keyboard.")
 
 def onClick(x, y, button, pressed):
@@ -47,50 +54,73 @@ def emptyBin():
         # thx g4g
         # https://www.geeksforgeeks.org/python/how-to-empty-recycle-bin-using-python/
     recycleButton.configure(text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
+    print("EVENT: Emptied Recycle Bin.")
 
 def lightToDark():
     customtkinter.set_appearance_mode("dark")
     appearanceButton.configure(text="Switch to light mode", width=25, command=darkToLight)
+    print("EVENT: Day to night.")
 
 def darkToLight():
     customtkinter.set_appearance_mode("light")
     appearanceButton.configure(text="Switch to dark mode", width=25, command=lightToDark)
+    print("EVENT: Night to day.")
 
 def restartExplorer():
     restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
     time.sleep(0.1)
     subprocess.Popen(["explorer.exe"], shell=True)
-    print("Restarted!")
+    print("Restarted.")
 
 def updateWinget():
     command="winget update --all"
     subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt winget update execution successful.")
 
 def flushDNS():
     command="ipconfig /flushdns"
     subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt flushdns execution successful.")
 
 def clearClipboard():
     if windll.user32.OpenClipboard(None):
         windll.user32.EmptyClipboard()
         windll.user32.CloseClipboard()
     # https://stackoverflow.com/questions/9123090/clear-clipboard
+    print("EVENT: Clipboard cleared.")
 
 def parrot():
     command="curl parrot.live"
     subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: parrot")
 
 def batteryReport():
     command="powercfg /batteryreport"
     subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt report generation successful.")
 
 def rickroll():
     command="curl ascii.live/rick"
     subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: hahaha")
 
+def dism():
+    command="DISM /Online /CLeanup-Image /RestoreHealth"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt dism execution successful.")
+
+def sfcScan():
+    command="sfc /scannow"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt sfc execution successful.")
+
+def chkdsk():
+    command="chkdsk /f /r"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt chkdsk execution successful.")
 
 root=customtkinter.CTk()
-root.geometry("400x800")
+root.geometry("400x1000")
 root.bind('<Return>', unlockMouse)
 
 customtkinter.set_default_color_theme("green")
@@ -131,5 +161,14 @@ parrotButton.pack(padx=20, pady=20)
 
 rickrollButton=customtkinter.CTkButton(root, text="Mystery Button", width=25, command=rickroll)
 rickrollButton.pack(padx=20, pady=20)
+
+dismButton=customtkinter.CTkButton(root, text="Check for and repair damaged system files (DISM)", width=25, command=dism)
+dismButton.pack(padx=20, pady=20)
+
+sfcButton=customtkinter.CTkButton(root, text="Check for and repair critical system files (sfc)", width=25, command=sfcScan)
+sfcButton.pack(padx=20, pady=20)
+
+chkdskButton=customtkinter.CTkButton(root, text="Check drive for and repair bad sectors/errors (chkdsk)", width=25, command=chkdsk)
+chkdskButton.pack(padx=20, pady=20)
 
 root.mainloop()
