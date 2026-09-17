@@ -68,7 +68,7 @@ def darkToLight():
 
 def restartExplorer():
     restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
-    time.sleep(0.1)
+    time.sleep(1)
     subprocess.Popen(["explorer.exe"], shell=True)
     print("Restarted.")
 
@@ -124,51 +124,71 @@ root.geometry("400x1000")
 root.bind('<Return>', unlockMouse)
 
 customtkinter.set_default_color_theme("green")
-customtkinter.set_appearance_mode("light")
+customtkinter.set_appearance_mode("dark")
 
-label=customtkinter.CTkLabel(root, text="Halt! Input")
-label.pack()
+label=customtkinter.CTkLabel(root, text="Halt! Input", font=("Impact", 50, "bold"))
+label.pack(pady=30)
 
-keyboardButton=customtkinter.CTkButton(root, text="Halt Input", width=25, command=lockKeyboard)
-keyboardButton.pack(padx=20, pady=20)
+appearanceLabel=customtkinter.CTkLabel(root, text="Halt! Input Appearence", font=("Impact", 25, "normal"))
+appearanceLabel.pack()
 
-mouseButton=customtkinter.CTkButton(root, text="Lock Mouse", width=25, command=lockMouse)
-mouseButton.pack(padx=20, pady=20)
+appearanceButton=customtkinter.CTkButton(root, text="Switch to light mode", width=25, command=darkToLight)
+appearanceButton.pack(pady=15)
 
-recycleButton=customtkinter.CTkButton(root, text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
-recycleButton.pack(padx=20, pady=20)
 
-appearanceButton=customtkinter.CTkButton(root, text="Switch to dark mode", width=25, command=lightToDark)
-appearanceButton.pack(padx=20, pady=20)
+inputLabel=customtkinter.CTkLabel(root, text="Input Blocking", font=("Impact", 25, "normal"))
+inputLabel.pack()
 
-restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer)
-restartExplorerButton.pack(padx=20, pady=20)
+keyboardButton=customtkinter.CTkButton(root, text="Halt! Keyboard Blocking", width=25, command=lockKeyboard)
+keyboardButton.pack(pady=15)
+
+mouseButton=customtkinter.CTkButton(root, text="Halt! Mouse Blocking", width=25, command=lockMouse)
+mouseButton.pack(pady=15)
+
+
+cmdLabel=customtkinter.CTkLabel(root, text="Command Prompt Speed-dial", font=("Impact", 25, "normal"))
+cmdLabel.pack()
 
 updateWingetButton=customtkinter.CTkButton(root, text="Update Winget packages", width=25, command=updateWinget)
-updateWingetButton.pack(padx=20, pady=20)
+updateWingetButton.pack(pady=15)
 
 flushDNSButton=customtkinter.CTkButton(root, text="Flush DNS", width=25, command=flushDNS)
-flushDNSButton.pack(padx=20, pady=20)
+flushDNSButton.pack(pady=15)
 
 clearClipboardButton=customtkinter.CTkButton(root, text="Clear clipboard", width=25, command=clearClipboard)
-clearClipboardButton.pack(padx=20, pady=20)
+clearClipboardButton.pack(pady=15)
 
 batteryReportButton=customtkinter.CTkButton(root, text="Generate battery report (if applicable)", width=25, command=batteryReport)
-batteryReportButton.pack(padx=20, pady=20)
-
-parrotButton=customtkinter.CTkButton(root, text="Parrot", width=25, command=parrot)
-parrotButton.pack(padx=20, pady=20)
-
-rickrollButton=customtkinter.CTkButton(root, text="Mystery Button", width=25, command=rickroll)
-rickrollButton.pack(padx=20, pady=20)
+batteryReportButton.pack(pady=15)
 
 dismButton=customtkinter.CTkButton(root, text="Check for and repair damaged system files (DISM)", width=25, command=dism)
-dismButton.pack(padx=20, pady=20)
+dismButton.pack(pady=15)
 
 sfcButton=customtkinter.CTkButton(root, text="Check for and repair critical system files (sfc)", width=25, command=sfcScan)
-sfcButton.pack(padx=20, pady=20)
+sfcButton.pack(pady=15)
 
 chkdskButton=customtkinter.CTkButton(root, text="Check drive for and repair bad sectors/errors (chkdsk)", width=25, command=chkdsk)
-chkdskButton.pack(padx=20, pady=20)
+chkdskButton.pack(pady=15)
+
+
+funLabel=customtkinter.CTkLabel(root, text="Fun", font=("Impact", 25, "normal"))
+funLabel.pack()
+
+parrotButton=customtkinter.CTkButton(root, text="Parrot", width=25, command=parrot)
+parrotButton.pack(pady=15)
+
+rickrollButton=customtkinter.CTkButton(root, text="Mystery Button", width=25, command=rickroll)
+rickrollButton.pack(pady=15)
+
+
+
+dangerLabel=customtkinter.CTkLabel(root, text="(Kind of) Dangerous actions", font=("Impact", 25, "normal"))
+dangerLabel.pack()
+
+recycleButton=customtkinter.CTkButton(root, text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
+recycleButton.pack(pady=15)
+
+restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer, fg_color=("#FF0000", "#8B0000"))
+restartExplorerButton.pack(pady=15)
 
 root.mainloop()
