@@ -6,6 +6,7 @@ import winshell
 import subprocess
 import ctypes
 import sys
+import os
 from ctypes import windll
 from pynput.mouse import Listener
 
@@ -69,13 +70,14 @@ def darkToLight():
 def restartExplorer():
     restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
     time.sleep(1)
-    subprocess.Popen(["explorer.exe"], shell=True)
+    os.startfile("explorer.exe")
     print("Restarted.")
 
-def updateWinget():
-    command="winget update --all"
-    subprocess.run(f'start cmd /k "{command}"', shell=True)
-    print("EVENT: Attempt winget update execution successful.")
+# when run as admin explorer.exe does not launch, must be launched as standard user
+#def updateWinget():
+#    command="winget update --all"
+#    subprocess.run(f'start cmd /k "{command}"', shell=True)
+#    print("EVENT: Attempt winget update execution successful.")
 
 def flushDNS():
     command="ipconfig /flushdns"
@@ -188,7 +190,7 @@ dangerLabel.pack()
 recycleButton=customtkinter.CTkButton(root, text="Empty Recycle Bin", width=25, command=emptyBin, fg_color=("#FF0000", "#8B0000"))
 recycleButton.pack(pady=15)
 
-restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer, fg_color=("#FF0000", "#8B0000"))
-restartExplorerButton.pack(pady=15)
+#restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer, fg_color=("#FF0000", "#8B0000"))
+#restartExplorerButton.pack(pady=15)
 
 root.mainloop()

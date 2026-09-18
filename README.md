@@ -25,5 +25,5 @@ A toolbox for maintenance/fun things.
 
 - Empty bin\
   self explanatory, init?
-- Restart Windows Explorer\
+- (COMING SOON) Restart Windows Explorer\
   if taskbar is frozen, use this to quickly and safely force-restart Windows Explorer (not the file picker)
