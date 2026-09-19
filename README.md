@@ -27,3 +27,15 @@ A toolbox for maintenance/fun things.
   self explanatory, init?
 - (COMING SOON) Restart Windows Explorer\
   if taskbar is frozen, use this to quickly and safely force-restart Windows Explorer (not the file picker)
+
+## Installation
+Halt! Input currently only supports Windows. Later releases may include Linux distrubutions. MacOS support is not planned to be released at all at the moment (tentative).
+
+### Prerequisites
+- Python 3.13+
+
+### Instructions
+1. Download the .exe from the releases folder. 
+2. Execute the file
+3. Windows Defender might show up. Simply click "More info" then "Run anyways". I promise it's safe
+4. The script will ask for administrator privleges. This is needed to run some of the speed-dial commands. Simply accept it (or enter the administrator password).
