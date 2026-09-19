@@ -193,6 +193,4 @@ recycleButton.pack(pady=15)
 #restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer, fg_color=("#FF0000", "#8B0000"))
 #restartExplorerButton.pack(pady=15)
 
-root.attributes("-topmost", True)
-
 root.mainloop()
