@@ -67,17 +67,17 @@ def darkToLight():
     appearanceButton.configure(text="Switch to dark mode", width=25, command=lightToDark)
     print("EVENT: Night to day.")
 
-def restartExplorer():
-    restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
-    time.sleep(1)
-    os.startfile("explorer.exe")
-    print("Restarted.")
-
 # when run as admin explorer.exe does not launch, must be launched as standard user
-#def updateWinget():
-#    command="winget update --all"
-#    subprocess.run(f'start cmd /k "{command}"', shell=True)
-#    print("EVENT: Attempt winget update execution successful.")
+#def restartExplorer():
+#    restart=subprocess.run(["taskkill", "/f", "/im", "explorer.exe"])
+#    time.sleep(1)
+#    os.startfile("explorer.exe")
+#    print("Restarted.")
+
+def updateWinget():
+    command="winget update --all"
+    subprocess.run(f'start cmd /k "{command}"', shell=True)
+    print("EVENT: Attempt winget update execution successful.")
 
 def flushDNS():
     command="ipconfig /flushdns"
@@ -192,5 +192,7 @@ recycleButton.pack(pady=15)
 
 #restartExplorerButton=customtkinter.CTkButton(root, text="Restart Windows Explorer", width=25, command=restartExplorer, fg_color=("#FF0000", "#8B0000"))
 #restartExplorerButton.pack(pady=15)
+
+root.attributes("-topmost", True)
 
 root.mainloop()
